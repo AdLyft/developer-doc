@@ -1,0 +1,26 @@
+{
+  "name": "developer-doc",
+  "version": "1.0.0",
+  "description": "This documentation details how to integrate AdLyft into your existing application and should only be accessible by publishers working with AdLyft directly.",
+  "main": "gulpfile.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "dependencies": {
+    "gulp-jade": "^1.0.0",
+    "gulp-markdown": "^1.0.0",
+    "gulp": "^3.8.11"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.9.1",
+    "gulp": "^3.8.11",
+    "gulp-jade": "^1.0.0",
+    "gulp-load-plugins": "^0.9.0",
+    "gulp-markdown": "^1.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
