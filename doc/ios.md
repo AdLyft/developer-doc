@@ -16,6 +16,32 @@ on a part please email me at dawsonreid@adlyft.com
 
 ## Including AdLyft in your project
 
+To include AdLyft to your project you must first obtain the framework and
+bundle (the AdLyft components). For now there is no download location for these
+because we are working directly with a select group of publishers.
+
+Once you have obtained the AdLyft components you must include them in your
+project. The framework should be added to your Linked Frameworks and Libraries
+by dragging and dropping into this section under your projects General config
+tab as shown here :
+
+![iOS Linked Framework Example](/images/ios-linked-frameworks.png)
+
+The framework should then automatically show up in your projects file tree as
+shown here :
+
+![iOS Project File Tree with Framework](/images/ios-project-tree-with-framework.png)
+
+Next you must add the AdLyft bundle to your project. This can be done by
+dragging and dropping it into your projects file tree :
+
+![iOS Project File Tree with Framework and Bundle](/images/ios-project-tree-with-framework-and-bundle.png)
+
+Once the bundle has been added confirm it has been added to your project's
+Build Phases > Copy Bundle Resources phace.
+
+![iOS Copy Bundle Resources Phase](/images/ios-copy-bundle-resources-phase.png)
+
 ## Initializing AdLyft
 
 AdLyft must be initialized with a GID (key) and secret. This GID and secret is
