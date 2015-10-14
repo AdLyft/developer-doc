@@ -121,16 +121,28 @@ Events are used to inform the publisher when AdLyft has (does not have) ads avai
 The events also inform the publisher when AdLyft starts playing media (such as a video or song) so that the publisher may pause or reduce the volume of any media (background music) they are currently playing.
 While conforming to the ADLEventDelegate it is highly recommended that one should listen to media play and stop events so they may stop and start there background music appropriately.
 
+Below methods should be implemented in your objective-C project
+
 ![iOS Copy Bundle Resources Phase](/images/ios-AppDelegateH-ADLEventDelegates.png)
 
-Image to implement ADLEventDelegate methods in AppDelegate.m
 
 ![iOS Copy Bundle Resources Phase](/images/ios-ADLEventDelegates.png)
 
-After implementing delegate methods set this line of code in your project's `AppDelegate`
-
+After implementing delegate methods set this line of code in your project's `AppDelegate.h`
 ```
 ADLAdLyftController.instance.delegate = self;
+```
+
+Below methods should be implemented in your swift project
+
+![iOS Copy Bundle Resources Phase](/images/swift-conforms-adleventdelegate.png)
+
+
+![iOS Copy Bundle Resources Phase](/images/swift-adleventdelegates.png)
+
+After implementing delegate methods set this line of code in your project's `AppDelegate.swift`
+```
+ADLAdLyftController.instance().delegate = self
 ```
 
 ## Check for AdLyft Error Object
