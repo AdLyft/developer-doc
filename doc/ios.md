@@ -90,6 +90,7 @@ let adlyftControllerObject = try ADLAdLyftController (GID:"example-gid", andSecr
 ## Triggering Interactive Advertisements
 
 AdLyft may be triggered with a single line of code and a callback as follows :
+Method for calling AdLyft from Objective-C
 
 ```objective-c
 [ADLAdLyftController.instance triggerOnView:self.view
@@ -97,6 +98,15 @@ AdLyft may be triggered with a single line of code and a callback as follows :
                                withCallback:^(ADLReward *reward, ADLResult *results){
     NSLog(@"AdLyft returned.");
 }];
+```
+
+Method for calling AdLyft from Swift
+```swift
+ADLAdLyftController.instance().triggerOnView(self.view, withRewardByKey:"Your Reward Key",
+                                                           withCallback:{ reward, results in
+    print("AdLyft returned.")
+})
+
 ```
 
 The view supplied to the `ADLAdLyftController` is prevented from receiving user
