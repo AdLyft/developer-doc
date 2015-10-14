@@ -62,8 +62,6 @@ In order to AdLyft work properly one must link few below mentioned libraries in 
 In order to access the Adlyft categories(for Adlyft to work properly) one must update 'other linker flag' in the build settings of the application target.
 The value must be -ObjC and -all_load under both the Debug and Release category of Other Linker Flags.
 
-Here is the screenshot for setting the other linker flags in Target build settings:
-
 ![iOS Copy Bundle Resources Phase](/images/ios-objc-linker-flags.png)
 
 ## Initializing AdLyft
@@ -73,11 +71,17 @@ specific to your application and is generated when you register an application
 though the AdLyft web portal. For information on creating a new application
 through the AdLyft web portal see here :
 
-The initialization code :
+The initialization code in Objective C :
 
 ```objective-c
 (void) [[ADLAdLyftController alloc] initWithGID:@"example-gid"
                                       andSecret:@"example-secret"];
+```
+
+The initialization code in Swift :
+
+```swift
+let adlyftControllerObject = try ADLAdLyftController (GID:"example-gid", andSecret:"example-secret")                
 ```
 
 **Note :** AdLyft uses a variant of HMAC based authentication and the secret is
