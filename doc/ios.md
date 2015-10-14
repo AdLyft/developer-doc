@@ -121,7 +121,8 @@ let me know (dawsonreid@adlyft.com).
 
 Events are used to inform the publisher when AdLyft has (does not have) ads available.
 The events also inform the publisher when AdLyft starts playing media (such as a video or song) so that the publisher may pause or reduce the volume of any media (background music) they are currently playing.
-While conforming to the ADLEventDelegate it is highly recommended that one should listen to media play and stop events so they may stop and start there background music appropriately.
+While conforming to the ADLEventDelegate it is highly recommended that one should listen to media play and stop events so they may stop and start there background music appropriately. 
+The state of the application like AdLyft is opened or closed, Ads are available or not, media is start or stop can also be achieved by configuring for push notifications from AdLyft.
 
 Below methods should be implemented in your objective-C project
 
