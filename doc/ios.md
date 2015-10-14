@@ -189,7 +189,9 @@ Rewards are what the user completes interactions to earn. These rewards can be e
 Rewards are created by clicking the Create Reward button located in the top right of the campaign details view in AdLyft.
 ![iOS Copy Bundle Resources Phase](/images/portal/create-reward-button.png)
 
+
 This will then open a modal
+
 ![iOS Copy Bundle Resources Phase](/images/portal/create-reward-modal.png)
 
 All of the fields are currently required and the cost or ratio must be greater than 0.
