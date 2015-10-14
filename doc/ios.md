@@ -11,14 +11,14 @@ on a part please email me at dawsonreid@adlyft.com
 ## Contents
 
 - [Including AdLyft in your project](#including-adlyft-in-your-project)
-- AdLyft Project Settings
-     *  Link Binary with Libraries
-     *  Configure Other Linker Flag 
-- Initializing AdLyft
-- Triggering AdLyft
-- Must Conforms to the ADLEventDelegate of Adlyft in your project
-- Check for AdLyft Error Object
-- Returning from AdLyft
+- [AdLyft Project Settings](#adlyft-project-settings)
+     *  [Link Binary with Libraries](#link-binary-with-libraries)
+     *  [Configure Other Linker Flag](#configure-other-linker-flag) 
+- [Initializing AdLyft](#initializing-adlyft) 
+- [Triggering AdLyft](#triggering-adlyft) 
+- [Must Conforms to the ADLEventDelegate of Adlyft in your project](#must-conforms-to-the-adleventdelegate-of-adlyft-in-your-project)
+- [Check for AdLyft Error Object](#check-for-adlyft-error-object)
+- [Returning from AdLyft](#returning-from-adlyft)
 
 ## Including AdLyft in your project
 
