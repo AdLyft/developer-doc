@@ -16,7 +16,7 @@ on a part please email me at dawsonreid@adlyft.com
      *  [Configure Other Linker Flag](#configure-other-linker-flag) 
 - [Initializing AdLyft](#initializing-adlyft) 
 - [Triggering interactive advertisements](#triggering-interactive-advertisements) 
-- [Listening for events](#must-conforms-to-the-adleventdelegate-of-adlyft-in-your-project)
+- [Listening for events](#listening-for-events)
 - [Check for AdLyft Error Object](#check-for-adlyft-error-object)
 - [Returning from AdLyft](#returning-from-adlyft)
 
