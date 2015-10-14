@@ -194,3 +194,6 @@ This will then open a modal
 
 All of the fields are currently required and the cost or ratio must be greater than 0.
 The key is what is used in your application to trigger AdLyft to open on a view. Once created it can not be changed. All other fields can be updated.
+
+### Result Object
+Result Object is used to get total quantity of consumable rewards. which further can be shown in our user interface.
