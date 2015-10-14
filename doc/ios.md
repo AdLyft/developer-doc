@@ -151,11 +151,16 @@ The Adlyft error object is initialized in `ADLAdLyftController` with the purpose
 For Example:
     * Authentication Fail in AppDelegate 
     
-    The initialization code for AdLyft is:
+    The initialization code for AdLyft in objective-C is:
 
 ```objective-c
   (void) [[ADLAdLyftController alloc]initWithGID:@"example-gid"
                                        andSecret:@"example-secret"];
+```
+ The initialization code for AdLyft in swift is:
+
+```swift
+  let adlyftControllerObject = try ADLAdLyftController (GID:"example-gid", andSecret:"example-secret")
 ```
 
 To handle error if authentication is not correct one must implement error handling to catch AdLyft error before displaying AdLyft
