@@ -15,8 +15,8 @@ on a part please email me at dawsonreid@adlyft.com
      *  [Link Binary with Libraries](#link-binary-with-libraries)
      *  [Configure Other Linker Flag](#configure-other-linker-flag) 
 - [Initializing AdLyft](#initializing-adlyft) 
-- [Triggering AdLyft](#triggering-adlyft) 
-- [Must Conforms to the ADLEventDelegate of Adlyft in your project](#must-conforms-to-the-adleventdelegate-of-adlyft-in-your-project)
+- [Triggering interactive advertisements](#triggering-interactive-advertisements) 
+- [Listening for events](#must-conforms-to-the-adleventdelegate-of-adlyft-in-your-project)
 - [Check for AdLyft Error Object](#check-for-adlyft-error-object)
 - [Returning from AdLyft](#returning-from-adlyft)
 
@@ -52,22 +52,7 @@ Build Phases > Copy Bundle Resources phace.
 
 #### Link Binary with Libraries
 
-In order to AdLyft work properly one must link few below mentioned libraries in Build Phases. These Libraries must be included in Build Phases of the project Target under the category #Link Binary with Libraries
-Libraries are as follows:
-  1. AdLyft.framework
-  2. MediaPlayer.framework
-  3. CoreMotion.framework
-  4. CoreLocation.framework
-  5. ImageIO.framework
-  6. AdSupport.framework
-  7. AvFoundation.framework
-  8. CoreImage.framework
-  9. CoreTelephony.framework
-  10. MobileCoreServices.framework
-  11. QuartzCore.framework
-  12. SystemConfiguration.framework
-  
-Here is the screenshot regarding to this
+In order to AdLyft work properly one must link few below mentioned libraries in Build Phases. These Libraries must be included in Build Phases of the project Target under the category **Link Binary with Libraries**
 
 ![iOS Copy Bundle Resources Phase](/images/ios-link-binary-with-libraries.png)
 
@@ -91,14 +76,14 @@ through the AdLyft web portal see here :
 The initialization code :
 
 ```objective-c
-  (void) [[ADLAdLyftController alloc]initWithGID:@"example-gid"
-                                       andSecret:@"example-secret"];
+(void) [[ADLAdLyftController alloc] initWithGID:@"example-gid"
+                                      andSecret:@"example-secret"];
 ```
 
 **Note :** AdLyft uses a variant of HMAC based authentication and the secret is
 **secret** and never transmitted over the network.
 
-## Triggering AdLyft
+## Triggering Interactive Advertisements
 
 AdLyft may be triggered with a single line of code and a callback as follows :
 
@@ -114,12 +99,13 @@ The view supplied to the `ADLAdLyftController` is prevented from receiving user
 interaction via `view.userInteractionEnabled = NO;`. If this is a problem please
 let me know (dawsonreid@adlyft.com).
 
-It is recommended that the relevant button to trigger the adlyft must be disabled or hidden when Adlyft does not have ads to serve.
+**Pro Tip :** Disable of hide the button to trigger AdLyft when there are no ads available!
 
-## Must Conforms to the ADLEventDelegate 
-It is mandatory to conform the ADLEventDelegate in AppDelegate of your project. So that we can listen to its events or state of Adlyft application like:
+## Listening for Events
 
-Image to adopt `ADLEventDelegate` in AppDelegate.h
+Events are used to inform the publisher when AdLyft has (does not have) ads available.
+The events also inform the publisher when AdLyft starts playing media (such as a video or song) so that the publisher may pause or reduce the volume of any media (background music) they are currently playing.
+While conforming to the ADLEventDelegate it is highly recommended that one should listen to media play and stop events so they may stop and start there background music appropriately.
 
 ![iOS Copy Bundle Resources Phase](/images/ios-AppDelegateH-ADLEventDelegates.png)
 
@@ -127,16 +113,11 @@ Image to implement ADLEventDelegate methods in AppDelegate.m
 
 ![iOS Copy Bundle Resources Phase](/images/ios-ADLEventDelegates.png)
 
-After Implementing Delegate methods set this line of code in your project AppDelegate        
+After implementing delegate methods set this line of code in your project's `AppDelegate`
+
 ```
 ADLAdLyftController.instance.delegate = self;
 ```
-
-These delegate methods are linked in our ADLAdLyftController.
-`ADLAdLyftController` that the publisher interacts with emits events through the notification centre, and supports the use of a delegate.
-These events are used to inform the publisher when AdLyft has (does not have) ads available.
-The events also inform the publisher when AdLyft starts playing media (such as a video or song) so that the publisher may pause or reduce the volume of any media (background music) they are currently playing.
-While conforming to the ADLEventDelegate it is highly recommended that one should listen to media play and stop events so they may stop and start there background music appropriately.
 
 ## Check for AdLyft Error Object
 
@@ -152,16 +133,15 @@ For Example:
 ```
 
 To handle error if authentication is not correct one must implement error handling to catch AdLyft error before displaying AdLyft
+
 ```objective-c
-```
-```
 @try {
-  (void) [[ADLAdLyftController alloc]initWithGID:@"example-gid"
-                                       andSecret:@"example-secret"];
-        ADLAdLyftController.instance.delegate = self;
-    } @catch(NSException *exception) {
-        NSLog(@"ADLAdLyftController exception : %@", exception);
-    }
+    (void) [[ADLAdLyftController alloc] initWithGID:@"example-gid"
+                                          andSecret:@"example-secret"];
+    ADLAdLyftController.instance.delegate = self;
+} @catch(NSException *exception) {
+    NSLog(@"ADLAdLyftController exception : %@", exception);
+}
 ```
 
 ## Returning from AdLyft
