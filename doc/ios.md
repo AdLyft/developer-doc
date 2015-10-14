@@ -19,6 +19,8 @@ on a part please email me at dawsonreid@adlyft.com
 - [Listening for events](#listening-for-events)
 - [Check for AdLyft Error Object](#check-for-adlyft-error-object)
 - [Returning from AdLyft](#returning-from-adlyft)
+    * [Reward Object](#reward-object)
+    * [Result Object](#result-object)
 
 ## Including AdLyft in your project
 
@@ -179,3 +181,16 @@ To handle error if authentication is not correct one must implement error handli
 
 When AdLyft is complete the completion block is called and provided an
 `ADLReward` and `ADLResult` object.
+
+### Reward Object
+Rewards are what the user completes interactions to earn. These rewards can be either :
+    * Consumable
+    * Non-Consumable
+Rewards are created by clicking the Create Reward button located in the top right of the campaign details view in AdLyft.
+![iOS Copy Bundle Resources Phase](/images/portal/create-reward-button.png)
+
+This will then open a modal
+![iOS Copy Bundle Resources Phase](/images/portal/create-reward-modal.png)
+
+All of the fields are currently required and the cost or ratio must be greater than 0.
+The key is what is used in your application to trigger AdLyft to open on a view. Once created it can not be changed. All other fields can be updated.
