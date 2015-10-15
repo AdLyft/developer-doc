@@ -61,8 +61,7 @@ In order to AdLyft work properly one must link few below mentioned libraries in 
 
 #### Configure Other Linker Flag
 
-In order to access the Adlyft categories(for Adlyft to work properly) one must update 'other linker flag' in the build settings of the application target.
-The value must be -ObjC and -all_load under both the Debug and Release category of Other Linker Flags.
+Adlyft uses several custom categories. For these categories to be loaded properly from within a framework the `Other Linker Flags` in the build settings of the application target must include `-ObjC`.
 
 ![iOS Copy Bundle Resources Phase](/images/ios-objc-linker-flags.png)
 
