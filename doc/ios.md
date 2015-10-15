@@ -16,9 +16,11 @@ on a part please email me at dawsonreid@adlyft.com
      *  [Configure Other Linker Flag](#configure-other-linker-flag) 
 - [Initializing AdLyft](#initializing-adlyft) 
 - [Triggering interactive advertisements](#triggering-interactive-advertisements) 
-- [Listening for events](#must-conforms-to-the-adleventdelegate-of-adlyft-in-your-project)
+- [Listening for events](#listening-for-events)
 - [Check for AdLyft Error Object](#check-for-adlyft-error-object)
 - [Returning from AdLyft](#returning-from-adlyft)
+    * [Reward Object](#reward-object)
+    * [Result Object](#result-object)
 
 ## Including AdLyft in your project
 
@@ -62,8 +64,6 @@ In order to AdLyft work properly one must link few below mentioned libraries in 
 In order to access the Adlyft categories(for Adlyft to work properly) one must update 'other linker flag' in the build settings of the application target.
 The value must be -ObjC and -all_load under both the Debug and Release category of Other Linker Flags.
 
-Here is the screenshot for setting the other linker flags in Target build settings:
-
 ![iOS Copy Bundle Resources Phase](/images/ios-objc-linker-flags.png)
 
 ## Initializing AdLyft
@@ -73,11 +73,17 @@ specific to your application and is generated when you register an application
 though the AdLyft web portal. For information on creating a new application
 through the AdLyft web portal see here :
 
-The initialization code :
+The initialization code in Objective C :
 
 ```objective-c
 (void) [[ADLAdLyftController alloc] initWithGID:@"example-gid"
                                       andSecret:@"example-secret"];
+```
+
+The initialization code in Swift :
+
+```swift
+let adlyftControllerObject = try ADLAdLyftController (GID:"example-gid", andSecret:"example-secret")                
 ```
 
 **Note :** AdLyft uses a variant of HMAC based authentication and the secret is
@@ -86,6 +92,7 @@ The initialization code :
 ## Triggering Interactive Advertisements
 
 AdLyft may be triggered with a single line of code and a callback as follows :
+Method for calling AdLyft from Objective-C
 
 ```objective-c
 [ADLAdLyftController.instance triggerOnView:self.view
@@ -93,6 +100,15 @@ AdLyft may be triggered with a single line of code and a callback as follows :
                                withCallback:^(ADLReward *reward, ADLResult *results){
     NSLog(@"AdLyft returned.");
 }];
+```
+
+Method for calling AdLyft from Swift
+```swift
+ADLAdLyftController.instance().triggerOnView(self.view, withRewardByKey:"Your Reward Key",
+                                                           withCallback:{ reward, results in
+    print("AdLyft returned.")
+})
+
 ```
 
 The view supplied to the `ADLAdLyftController` is prevented from receiving user
@@ -105,18 +121,31 @@ let me know (dawsonreid@adlyft.com).
 
 Events are used to inform the publisher when AdLyft has (does not have) ads available.
 The events also inform the publisher when AdLyft starts playing media (such as a video or song) so that the publisher may pause or reduce the volume of any media (background music) they are currently playing.
-While conforming to the ADLEventDelegate it is highly recommended that one should listen to media play and stop events so they may stop and start there background music appropriately.
+While conforming to the ADLEventDelegate it is highly recommended that one should listen to media play and stop events so they may stop and start there background music appropriately. 
+The state of the application like AdLyft is opened or closed, Ads are available or not, media is start or stop can also be achieved by configuring for push notifications from AdLyft.
+
+Below methods should be implemented in your objective-C project
 
 ![iOS Copy Bundle Resources Phase](/images/ios-AppDelegateH-ADLEventDelegates.png)
 
-Image to implement ADLEventDelegate methods in AppDelegate.m
 
 ![iOS Copy Bundle Resources Phase](/images/ios-ADLEventDelegates.png)
 
-After implementing delegate methods set this line of code in your project's `AppDelegate`
-
+After implementing delegate methods set this line of code in your project's `AppDelegate.h`
 ```
 ADLAdLyftController.instance.delegate = self;
+```
+
+Below methods should be implemented in your swift project
+
+![iOS Copy Bundle Resources Phase](/images/swift-conforms-adleventdelegate.png)
+
+
+![iOS Copy Bundle Resources Phase](/images/swift-adleventdelegates.png)
+
+After implementing delegate methods set this line of code in your project's `AppDelegate.swift`
+```
+ADLAdLyftController.instance().delegate = self
 ```
 
 ## Check for AdLyft Error Object
@@ -125,11 +154,16 @@ The Adlyft error object is initialized in `ADLAdLyftController` with the purpose
 For Example:
     * Authentication Fail in AppDelegate 
     
-    The initialization code for AdLyft is:
+    The initialization code for AdLyft in objective-C is:
 
 ```objective-c
   (void) [[ADLAdLyftController alloc]initWithGID:@"example-gid"
                                        andSecret:@"example-secret"];
+```
+ The initialization code for AdLyft in swift is:
+
+```swift
+  let adlyftControllerObject = try ADLAdLyftController (GID:"example-gid", andSecret:"example-secret")
 ```
 
 To handle error if authentication is not correct one must implement error handling to catch AdLyft error before displaying AdLyft
@@ -148,3 +182,21 @@ To handle error if authentication is not correct one must implement error handli
 
 When AdLyft is complete the completion block is called and provided an
 `ADLReward` and `ADLResult` object.
+
+### Reward Object
+Rewards are what the user completes interactions to earn. These rewards can be either :
+    * Consumable
+    * Non-Consumable
+Rewards are created by clicking the Create Reward button located in the top right of the campaign details view in AdLyft.
+![iOS Copy Bundle Resources Phase](/images/portal/create-reward-button.png)
+
+
+This will then open a modal
+
+![iOS Copy Bundle Resources Phase](/images/portal/create-reward-modal.png)
+
+All of the fields are currently required and the cost or ratio must be greater than 0.
+The key is what is used in your application to trigger AdLyft to open on a view. Once created it can not be changed. All other fields can be updated.
+
+### Result Object
+Result Object is used to get total quantity of consumable rewards. which further can be shown in our user interface.
