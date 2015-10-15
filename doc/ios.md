@@ -54,25 +54,27 @@ Build Phases > Copy Bundle Resources phace.
 
 #### Link Binary with Libraries
 
-In order to AdLyft work properly one must link few below mentioned libraries in Build Phases. These Libraries must be included in Build Phases of the project Target under the category **Link Binary with Libraries**
+The following frameworks must be included in **Build Phases** of the project 
+Target under the category **Link Binary with Libraries**
 
 ![iOS Copy Bundle Resources Phase](/images/ios-link-binary-with-libraries.png)
 
-
 #### Configure Other Linker Flag
 
-Adlyft uses several custom categories. For these categories to be loaded properly from within a framework the `Other Linker Flags` in the build settings of the application target must include `-ObjC`.
+Adlyft uses several custom categories. For these categories to be loaded properly 
+from within a framework the `Other Linker Flags` in the build settings of the 
+application target must include `-ObjC`.
 
 ![iOS Copy Bundle Resources Phase](/images/ios-objc-linker-flags.png)
 
 ## Initializing AdLyft
 
-AdLyft must be initialized with a GID (key) and secret. This GID and secret is
+AdLyft must be initialized with a GID (key) and secret. This GID and secret is 
 specific to your application and is generated when you register an application
 though the AdLyft web portal. For information on creating a new application
 through the AdLyft web portal see here :
 
-The initialization code in Objective C :
+The initialization code in Objective-C :
 
 ```objective-c
 (void) [[ADLAdLyftController alloc] initWithGID:@"example-gid"
@@ -82,11 +84,11 @@ The initialization code in Objective C :
 The initialization code in Swift :
 
 ```swift
-let adlyftControllerObject = try ADLAdLyftController (GID:"example-gid", andSecret:"example-secret")                
+_ = try ADLAdLyftController(GID:"example-gid", andSecret:"example-secret")                
 ```
 
 **Note :** AdLyft uses a variant of HMAC based authentication and the secret is
-**secret** and never transmitted over the network.
+never transmitted over the network.
 
 ## Triggering Interactive Advertisements
 
@@ -101,55 +103,52 @@ Method for calling AdLyft from Objective-C
 }];
 ```
 
-Method for calling AdLyft from Swift
+Method for calling AdLyft from Swift : 
+
 ```swift
 ADLAdLyftController.instance().triggerOnView(self.view, withRewardByKey:"Your Reward Key",
                                                            withCallback:{ reward, results in
     print("AdLyft returned.")
 })
-
 ```
 
 The view supplied to the `ADLAdLyftController` is prevented from receiving user
 interaction via `view.userInteractionEnabled = NO;`. If this is a problem please
 let me know (dawsonreid@adlyft.com).
 
-**Pro Tip :** Disable of hide the button to trigger AdLyft when there are no ads available!
+**Pro Tip :** Disable the hide the button to trigger AdLyft when there are no ads 
+available!
 
 ## Listening for Events
 
-Events are used to inform the publisher when AdLyft has (does not have) ads available.
-The events also inform the publisher when AdLyft starts playing media (such as a video or song) so that the publisher may pause or reduce the volume of any media (background music) they are currently playing.
-While conforming to the ADLEventDelegate it is highly recommended that one should listen to media play and stop events so they may stop and start there background music appropriately. 
-The state of the application like AdLyft is opened or closed, Ads are available or not, media is start or stop can also be achieved by configuring for push notifications from AdLyft.
+Events are used to inform when AdLyft has (or does not have) ads available.
+The events also inform when media starts playing (such as a video or song) so 
+that you may pause or reduce the volume of any media (background music) they 
+is currently playing.
 
-Below methods should be implemented in your objective-C project
+Events may be recieved by either conforming to the `ADLEventDelegate.h` protocol
+or listening for events through the `NSNotificationCeneter`. 
+
+`ADLEventDelegate` : 
 
 ![iOS Copy Bundle Resources Phase](/images/ios-AppDelegateH-ADLEventDelegates.png)
 
+After implementing delegate methods set this line of code in your project's `AppDelegate.h` : 
 
-![iOS Copy Bundle Resources Phase](/images/ios-ADLEventDelegates.png)
-
-After implementing delegate methods set this line of code in your project's `AppDelegate.h`
-```
+```objective-c
 ADLAdLyftController.instance.delegate = self;
 ```
 
-Below methods should be implemented in your swift project
+or in Swift : 
 
-![iOS Copy Bundle Resources Phase](/images/swift-conforms-adleventdelegate.png)
-
-
-![iOS Copy Bundle Resources Phase](/images/swift-adleventdelegates.png)
-
-After implementing delegate methods set this line of code in your project's `AppDelegate.swift`
-```
+```swift
 ADLAdLyftController.instance().delegate = self
 ```
 
 ## Check for AdLyft Error Object
 
 The Adlyft error object is initialized in `ADLAdLyftController` with the purpose of checking Adlyft works properly or not.It is used to indicate to the publisher when an error occurs in the AdLyft SDK. It should be checked by the publisher before displaying AdLyft.
+
 For Example:
     * Authentication Fail in AppDelegate 
     
