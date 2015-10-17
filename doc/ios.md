@@ -182,23 +182,16 @@ if ADLAdLyftController.instance().error != nil {
 
 ## Returning from AdLyft
 
-When AdLyft is complete the completion block is called and provided an
-`ADLReward` and `ADLResult` object.
+When AdLyft is complete the completion block is called and provided an `ADLReward` and `ADLResult` object.
 
-### Reward Object
+### ADLReward
+
 Rewards are what the user completes interactions to earn. These rewards can be either :
+    
     * Consumable
     * Non-Consumable
-Rewards are created by clicking the Create Reward button located in the top right of the campaign details view in AdLyft.
-![iOS Copy Bundle Resources Phase](/images/portal/create-reward-button.png)
 
+### ADLResult
 
-This will then open a modal
-
-![iOS Copy Bundle Resources Phase](/images/portal/create-reward-modal.png)
-
-All of the fields are currently required and the cost or ratio must be greater than 0.
-The key is what is used in your application to trigger AdLyft to open on a view. Once created it can not be changed. All other fields can be updated.
-
-### Result Object
-Result Object is used to get total quantity of consumable rewards. which further can be shown in our user interface.
+The result object contains the total quantity of consumable rewards or a `BOOL` indicating if the non
+consumable reward was earned. 
