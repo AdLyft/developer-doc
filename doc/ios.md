@@ -17,7 +17,7 @@ on a part please email me at dawsonreid@adlyft.com
 - [Initializing AdLyft](#initializing-adlyft) 
 - [Triggering interactive advertisements](#triggering-interactive-advertisements) 
 - [Listening for events](#listening-for-events)
-- [Check for AdLyft Error Object](#check-for-adlyft-error-object)
+- [Checking for Errors](#checking-for-errors)
 - [Returning from AdLyft](#returning-from-adlyft)
     * [Reward Object](#reward-object)
     * [Result Object](#result-object)
@@ -145,34 +145,38 @@ or in Swift :
 ADLAdLyftController.instance().delegate = self
 ```
 
-## Check for AdLyft Error Object
+## Checking for Errors
 
-The Adlyft error object is initialized in `ADLAdLyftController` with the purpose of checking Adlyft works properly or not.It is used to indicate to the publisher when an error occurs in the AdLyft SDK. It should be checked by the publisher before displaying AdLyft.
+The AdLyft controller exposes an error object. This object is set when an error occurs internal to 
+AdLyft that cannot be recovered from. This should not be a problem 90% of the time, though may occur
+for reasons such as : 
 
-For Example:
-    * Authentication Fail in AppDelegate 
-    
-    The initialization code for AdLyft in objective-C is:
+- authentication fails
+- something exploded
+
+You should always check the AdLyft error object before triggering AdLyft :     
 
 ```objective-c
-  (void) [[ADLAdLyftController alloc]initWithGID:@"example-gid"
-                                       andSecret:@"example-secret"];
+if (!ADLAdLyftController.instance.error) {
+    NSLog("Its not safe to open AdLyft :/");
+} else {
+    [ADLAdLyftController.instance triggerOnView:self.view withRewardByKey:"Coin Rewards", 
+        withCallback:^(ADLReward *reward, ADLResult *result) { 
+            NSLog("Returned from AdLyftController");
+    }];
+}
 ```
- The initialization code for AdLyft in swift is:
+
+or in Swift : 
 
 ```swift
-  let adlyftControllerObject = try ADLAdLyftController (GID:"example-gid", andSecret:"example-secret")
-```
-
-To handle error if authentication is not correct one must implement error handling to catch AdLyft error before displaying AdLyft
-
-```objective-c
-@try {
-    (void) [[ADLAdLyftController alloc] initWithGID:@"example-gid"
-                                          andSecret:@"example-secret"];
-    ADLAdLyftController.instance.delegate = self;
-} @catch(NSException *exception) {
-    NSLog(@"ADLAdLyftController exception : %@", exception);
+if ADLAdLyftController.instance().error != nil {
+    print("Its not safe to open AdLyft :/")
+} else {
+    ADLAdLyftController.instance().triggerOnView(self.view, withRewardByKey:"Coin Rewards", 
+        withCallback: { reward, results in
+            print("Returned from AdLyftController")
+    })
 }
 ```
 
