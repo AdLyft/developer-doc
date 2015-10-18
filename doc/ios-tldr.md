@@ -35,7 +35,8 @@ in the AdLyft portal :
 or in Swift :
 
 ```swift
-_ = try ADLAdLyftController(GID:"example-gid", andSecret:"example-secret")             ```
+_ = try ADLAdLyftController(GID:"example-gid", andSecret:"example-secret")      
+```
 
 #### Step 4 : Triggering Interactive Advertisements
 
