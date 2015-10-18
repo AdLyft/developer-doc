@@ -13,9 +13,9 @@ on a part please email me at dawsonreid@adlyft.com
 - [Including AdLyft in your project](#including-adlyft-in-your-project)
 - [AdLyft Project Settings](#adlyft-project-settings)
      *  [Link Binary with Libraries](#link-binary-with-libraries)
-     *  [Configure Other Linker Flag](#configure-other-linker-flag) 
-- [Initializing AdLyft](#initializing-adlyft) 
-- [Triggering interactive advertisements](#triggering-interactive-advertisements) 
+     *  [Configure Other Linker Flag](#configure-other-linker-flag)
+- [Initializing AdLyft](#initializing-adlyft)
+- [Triggering interactive advertisements](#triggering-interactive-advertisements)
 - [Listening for events](#listening-for-events)
 - [Checking for Errors](#checking-for-errors)
 - [Returning from AdLyft](#returning-from-adlyft)
@@ -54,22 +54,22 @@ Build Phases > Copy Bundle Resources phace.
 
 #### Link Binary with Libraries
 
-The following frameworks must be included in **Build Phases** of the project 
+The following frameworks must be included in **Build Phases** of the project
 Target under the category **Link Binary with Libraries**
 
 ![iOS Copy Bundle Resources Phase](/images/ios-link-binary-with-libraries.png)
 
 #### Configure Other Linker Flag
 
-Adlyft uses several custom categories. For these categories to be loaded properly 
-from within a framework the `Other Linker Flags` in the build settings of the 
+Adlyft uses several custom categories. For these categories to be loaded properly
+from within a framework the `Other Linker Flags` in the build settings of the
 application target must include `-ObjC`.
 
 ![iOS Copy Bundle Resources Phase](/images/ios-objc-linker-flags.png)
 
 ## Initializing AdLyft
 
-AdLyft must be initialized with a GID (key) and secret. This GID and secret is 
+AdLyft must be initialized with a GID (key) and secret. This GID and secret is
 specific to your application and is generated when you register an application
 though the AdLyft web portal. For information on creating a new application
 through the AdLyft web portal see here :
@@ -81,7 +81,7 @@ The initialization code in Objective-C :
                                       andSecret:@"example-secret"];
 ```
 
-The initialization code in Swift :
+or in Swift :
 
 ```swift
 _ = try ADLAdLyftController(GID:"example-gid", andSecret:"example-secret")                
@@ -92,18 +92,17 @@ never transmitted over the network.
 
 ## Triggering Interactive Advertisements
 
-AdLyft may be triggered with a single line of code and a callback as follows :
-Method for calling AdLyft from Objective-C
+AdLyft may be triggered as follows :
 
 ```objective-c
 [ADLAdLyftController.instance triggerOnView:self.view
-                            withRewardByKey:@"Your Reward Key" 
+                            withRewardByKey:@"Your Reward Key"
                                withCallback:^(ADLReward *reward, ADLResult *results){
     NSLog(@"AdLyft returned.");
 }];
 ```
 
-Method for calling AdLyft from Swift : 
+or in Swift :
 
 ```swift
 ADLAdLyftController.instance().triggerOnView(self.view, withRewardByKey:"Your Reward Key",
@@ -116,30 +115,30 @@ The view supplied to the `ADLAdLyftController` is prevented from receiving user
 interaction via `view.userInteractionEnabled = NO;`. If this is a problem please
 let me know (dawsonreid@adlyft.com).
 
-**Pro Tip :** Disable the hide the button to trigger AdLyft when there are no ads 
+**Pro Tip :** Disable the hide the button to trigger AdLyft when there are no ads
 available!
 
 ## Listening for Events
 
 Events are used to inform when AdLyft has (or does not have) ads available.
-The events also inform when media starts playing (such as a video or song) so 
-that you may pause or reduce the volume of any media (background music) they 
+The events also inform when media starts playing (such as a video or song) so
+that you may pause or reduce the volume of any media (background music) they
 is currently playing.
 
 Events may be recieved by either conforming to the `ADLEventDelegate.h` protocol
-or listening for events through the `NSNotificationCeneter`. 
+or listening for events through the `NSNotificationCeneter`.
 
-`ADLEventDelegate` : 
+`ADLEventDelegate` :
 
 ![iOS Copy Bundle Resources Phase](/images/ios-AppDelegateH-ADLEventDelegates.png)
 
-After implementing delegate methods set this line of code in your project's `AppDelegate.h` : 
+After implementing delegate methods set this line of code in your project's `AppDelegate.h` :
 
 ```objective-c
 ADLAdLyftController.instance.delegate = self;
 ```
 
-or in Swift : 
+or in Swift :
 
 ```swift
 ADLAdLyftController.instance().delegate = self
@@ -147,9 +146,9 @@ ADLAdLyftController.instance().delegate = self
 
 ## Checking for Errors
 
-The AdLyft controller exposes an error object. This object is set when an error occurs internal to 
+The AdLyft controller exposes an error object. This object is set when an error occurs internal to
 AdLyft that cannot be recovered from. This should not be a problem 90% of the time, though may occur
-for reasons such as : 
+for reasons such as :
 
 - authentication fails
 - something exploded
@@ -160,20 +159,20 @@ You should always check the AdLyft error object before triggering AdLyft :
 if (!ADLAdLyftController.instance.error) {
     NSLog("Its not safe to open AdLyft :/");
 } else {
-    [ADLAdLyftController.instance triggerOnView:self.view withRewardByKey:"Coin Rewards", 
-        withCallback:^(ADLReward *reward, ADLResult *result) { 
+    [ADLAdLyftController.instance triggerOnView:self.view withRewardByKey:"Coin Rewards",
+        withCallback:^(ADLReward *reward, ADLResult *result) {
             NSLog("Returned from AdLyftController");
     }];
 }
 ```
 
-or in Swift : 
+or in Swift :
 
 ```swift
 if ADLAdLyftController.instance().error != nil {
     print("Its not safe to open AdLyft :/")
 } else {
-    ADLAdLyftController.instance().triggerOnView(self.view, withRewardByKey:"Coin Rewards", 
+    ADLAdLyftController.instance().triggerOnView(self.view, withRewardByKey:"Coin Rewards",
         withCallback: { reward, results in
             print("Returned from AdLyftController")
     })
@@ -187,11 +186,11 @@ When AdLyft is complete the completion block is called and provided an `ADLRewar
 ### ADLReward
 
 Rewards are what the user completes interactions to earn. These rewards can be either :
-    
+
     * Consumable
     * Non-Consumable
 
 ### ADLResult
 
 The result object contains the total quantity of consumable rewards or a `BOOL` indicating if the non
-consumable reward was earned. 
+consumable reward was earned.
