@@ -17,7 +17,7 @@ Then navigate to the to the projects `Build Phases` and add the
 
 Add the following frameworks to the `Build Phases` > `Link with Binaries and Libraries` :
 
-![iOS Copy Bundle Resources Phase](/images/ios-link-binary-with-libraries.png)
+![iOS Copy Bundle Resources Phase](https://raw.githubusercontent.com/AdLyft/developer-doc/master/images/ios-link-binary-with-libraries.png)
 
 and add `-ObjC` to the `Build Settings` > `Other Linker Flags`
 
