@@ -33,22 +33,22 @@ project. The framework should be added to your Linked Frameworks and Libraries
 by dragging and dropping into this section under your projects General config
 tab as shown here :
 
-![iOS Linked Framework Example](/images/ios-linked-frameworks.png)
+![iOS Linked Framework Example](https://raw.githubusercontent.com/AdLyft/developer-doc/master/images/ios-linked-frameworks.png)
 
 The framework should then automatically show up in your projects file tree as
 shown here :
 
-![iOS Project File Tree with Framework](/images/ios-project-tree-with-framework.png)
+![iOS Project File Tree with Framework](https://raw.githubusercontent.com/AdLyft/developer-doc/master/images/ios-project-tree-with-framework.png)
 
 Next you must add the AdLyft bundle to your project. This can be done by
 dragging and dropping it into your projects file tree :
 
-![iOS Project File Tree with Framework and Bundle](/images/ios-project-tree-with-framework-and-bundle.png)
+![iOS Project File Tree with Framework and Bundle](https://raw.githubusercontent.com/AdLyft/developer-doc/master/images/ios-project-tree-with-framework-and-bundle.png)
 
 Once the bundle has been added confirm it has been added to your project's
 Build Phases > Copy Bundle Resources phace.
 
-![iOS Copy Bundle Resources Phase](/images/ios-copy-bundle-resources-phase.png)
+![iOS Copy Bundle Resources Phase](https://raw.githubusercontent.com/AdLyft/developer-doc/master/images/ios-copy-bundle-resources-phase.png)
 
 ## AdLyft Project Settings
 
@@ -57,7 +57,7 @@ Build Phases > Copy Bundle Resources phace.
 The following frameworks must be included in **Build Phases** of the project
 Target under the category **Link Binary with Libraries**
 
-![iOS Copy Bundle Resources Phase](/images/ios-link-binary-with-libraries.png)
+![iOS Copy Bundle Resources Phase](https://raw.githubusercontent.com/AdLyft/developer-doc/master/images/ios-link-binary-with-libraries.png)
 
 #### Configure Other Linker Flag
 
@@ -65,7 +65,7 @@ Adlyft uses several custom categories. For these categories to be loaded properl
 from within a framework the `Other Linker Flags` in the build settings of the
 application target must include `-ObjC`.
 
-![iOS Copy Bundle Resources Phase](/images/ios-objc-linker-flags.png)
+![iOS Copy Bundle Resources Phase](https://raw.githubusercontent.com/AdLyft/developer-doc/master/images/ios-objc-linker-flags.png)
 
 ## Initializing AdLyft
 
@@ -130,7 +130,7 @@ or listening for events through the `NSNotificationCeneter`.
 
 `ADLEventDelegate` :
 
-![iOS Copy Bundle Resources Phase](/images/ios-AppDelegateH-ADLEventDelegates.png)
+![iOS Copy Bundle Resources Phase](https://raw.githubusercontent.com/AdLyft/developer-doc/master/images/ios-AppDelegateH-ADLEventDelegates.png)
 
 After implementing delegate methods set this line of code in your project's `AppDelegate.h` :
 
