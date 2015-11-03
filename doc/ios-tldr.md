@@ -1,7 +1,5 @@
 # iOS AdLyft Integration Guide TL;DR
 
-----
-
 A more detailed guide on implementing the AdLyft iOS SDK may be found here :
 https://github.com/AdLyft/ios-example
 
